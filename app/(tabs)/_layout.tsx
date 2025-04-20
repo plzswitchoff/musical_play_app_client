@@ -1,43 +1,65 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { Tabs } from "expo-router";
+import React from "react";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Entypo from "@expo/vector-icons/Entypo";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import Feather from "@expo/vector-icons/Feather";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { StyleSheet } from "react-native";
 
 export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
-          },
-          default: {},
-        }),
-      }}>
+    <Tabs screenOptions={{ headerShown: false }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          title: "홈",
+          tabBarIcon: ({ focused, color }) =>
+            focused ? (
+              <Entypo name="home" size={24} color="black" />
+            ) : (
+              <AntDesign name="home" size={24} color={color} />
+            ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="exchange"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
+          title: "교환",
+          tabBarIcon: ({ focused, color }) =>
+            focused ? (
+              <MaterialCommunityIcons name="message" size={24} color="black" />
+            ) : (
+              <Feather name="message-square" size={24} color="black" />
+            ),
+        }}
+      />
+      <Tabs.Screen
+        name="community"
+        options={{
+          title: "커뮤니티",
+          tabBarIcon: ({ focused, color }) =>
+            focused ? (
+              <FontAwesome5 name="user-friends" size={24} color={color} />
+            ) : (
+              <Feather name="users" size={24} color="black" />
+            ),
+        }}
+      />
+      <Tabs.Screen
+        name="setting"
+        options={{
+          title: "설정",
+          tabBarIcon: ({ focused, color }) =>
+            focused ? (
+              <Ionicons name="settings" size={24} color="black" />
+            ) : (
+              <AntDesign name="setting" size={24} color={color} />
+            ),
         }}
       />
     </Tabs>
