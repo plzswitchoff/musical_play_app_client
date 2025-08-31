@@ -26,4 +26,5 @@ async function getMe(): Promise<Profile> {
   });
   return data;
 }
+
 export { postSignup, postSignin, getMe };

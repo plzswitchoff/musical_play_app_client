@@ -1,9 +1,20 @@
 import axiosInstance from "@/api/axios";
 import { CreatePostDto } from "@/types";
+import { getSecureStore } from "@/utils/secureStore";
 
 async function createPost(body: CreatePostDto) {
-  const { data } = await axiosInstance.post("/posts", body);
+  const accessToken = await getSecureStore("accessToken");
+  const { data } = await axiosInstance.post("/posts", body, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   return data;
 }
 
-export { createPost };
+async function getPosts(page = 1) {
+  const { data } = await axiosInstance.get(`/posts?page=${page}`);
+  return data;
+}
+
+export { createPost, getPosts };

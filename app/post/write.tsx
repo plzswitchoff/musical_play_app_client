@@ -1,13 +1,13 @@
 import DescriptionInput from "@/components/DescriptionInput";
 import TitleInput from "@/components/TitleInput";
 import { FormProvider, useForm } from "react-hook-form";
-import { Keyboard, ScrollView, StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { ImageUri } from "@/types";
 import { useEffect } from "react";
 import { useNavigation } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import useCreatePost from "@/hooks/queries/useCreatePost";
-import { ImageUri } from "@/types";
 
 type FormValues = {
   title: string;
@@ -16,9 +16,9 @@ type FormValues = {
 };
 
 export default function PostWriteScreen() {
+  const postMutation = useCreatePost();
   const navigation = useNavigation();
-  const createPost = useCreatePost();
-  const postForm = useForm<FormValues>({
+  const postForm = useForm({
     defaultValues: {
       title: "",
       description: "",
@@ -27,8 +27,10 @@ export default function PostWriteScreen() {
   });
 
   const onSubmit = (formValues: FormValues) => {
-    console.log("formValues", formValues);
-    createPost.mutate({ ...formValues });
+    console.log(formValues);
+    postMutation.mutate({
+      ...formValues,
+    });
   };
 
   useEffect(() => {
@@ -43,9 +45,10 @@ export default function PostWriteScreen() {
       ),
     });
   }, []);
+
   return (
     <FormProvider {...postForm}>
-      <KeyboardAwareScrollView style={styles.container}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
         <TitleInput />
         <DescriptionInput />
       </KeyboardAwareScrollView>

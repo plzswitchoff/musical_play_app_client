@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import FeedItem from "./FeedItem";
 import { colors } from "@/constants";
+import useGetPosts from "@/hooks/queries/useGetPosts";
 
 const dummyData = [
   {
@@ -45,9 +46,10 @@ const dummyData = [
 ];
 
 function FeedList() {
+  const { data } = useGetPosts();
   return (
     <FlatList
-      data={dummyData}
+      data={data}
       renderItem={({ item }) => <FeedItem post={item} />}
       keyExtractor={(item) => String(item.id)}
       contentContainerStyle={styles.contentContainer}

@@ -35,13 +35,15 @@ function useGetMe() {
   return { data };
 }
 
-function useAuth() {
-  const signupMutation = useMutation({
+function useSignup() {
+  return useMutation({
     mutationFn: postSignup,
     onSuccess: () => router.replace("/auth/login"),
   });
+}
 
-  const loginMutation = useMutation({
+function useLogin() {
+  return useMutation({
     mutationFn: postSignin,
     onSuccess: async ({ accessToken }) => {
       await saveSecureStore("accessToken", accessToken);
@@ -49,7 +51,11 @@ function useAuth() {
       router.replace("/");
     },
   });
+}
 
+function useAuth() {
+  const signupMutation = useSignup();
+  const loginMutation = useLogin();
   const { data } = useGetMe();
 
   const logout = () => {

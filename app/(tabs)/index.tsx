@@ -2,14 +2,14 @@ import FeedList from "@/components/FeedList";
 import { colors } from "@/constants";
 import useAuth from "@/hooks/queries/useAuth";
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
+import { router, useFocusEffect } from "expo-router";
 import { Pressable, SafeAreaView, StyleSheet } from "react-native";
+import useGetPosts from "@/hooks/queries/useGetPosts";
 
 export default function HomeScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <FeedList />
-
       <Pressable
         style={styles.writeButton}
         onPress={() => router.push("/post/write")}
