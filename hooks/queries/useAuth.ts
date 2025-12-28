@@ -9,11 +9,12 @@ import {
 import { removeHeader, setHeader } from "@/utils/header";
 import { useEffect } from "react";
 import queryClient from "@/api/queryClient";
+import {queryKeys} from "@/constants";
 
 function useGetMe() {
   const { data, isSuccess, isError } = useQuery({
     queryFn: getMe,
-    queryKey: ["auth", "getMe"],
+    queryKey: [queryKeys.AUTH, queryKeys.GET_ME],
   });
 
   useEffect(() => {
@@ -47,7 +48,7 @@ function useLogin() {
     mutationFn: postSignin,
     onSuccess: async ({ accessToken }) => {
       await saveSecureStore("accessToken", accessToken);
-      queryClient.fetchQuery({ queryKey: ["auth", "getMe"] });
+      queryClient.fetchQuery({ queryKey: [queryKeys.AUTH, queryKeys.GET_ME] });
       router.replace("/");
     },
   });
