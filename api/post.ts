@@ -17,4 +17,24 @@ async function getPosts(page = 1) {
   return data;
 }
 
-export { createPost, getPosts };
+async function getPost(id: number) {
+  const { data } = await axiosInstance.get(`/posts/${id}`);
+  return data;
+}
+
+type RequestUpdatePost = {
+  id: number;
+  body: CreatePostDto;
+};
+
+async function updatePost({ id, body }: RequestUpdatePost) {
+  const { data } = await axiosInstance.patch(`/posts/${id}`, body);
+  return data;
+}
+
+async function deletePost(id: number) {
+  const { data } = await axiosInstance.delete(`/posts/${id}`);
+  return data;
+}
+
+export { createPost, getPosts, updatePost, getPost, deletePost };

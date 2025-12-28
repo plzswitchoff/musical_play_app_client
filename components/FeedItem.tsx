@@ -5,6 +5,9 @@ import { Octicons, MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
 import { Post } from "@/types";
 import Profile from "./Profile";
 import useAuth from "@/hooks/queries/useAuth";
+import { useActionSheet } from "@expo/react-native-action-sheet";
+import { router } from "expo-router";
+import useDeletePost from "@/hooks/queries/useDeletePost";
 
 interface FeedItemProps {
   post: Post;
@@ -17,6 +20,35 @@ function FeedItem({ post }: FeedItemProps) {
 
   const isLiked = likeUsers?.includes(Number(auth.id));
 
+  const { showActionSheetWithOptions } = useActionSheet();
+  const deletePost = useDeletePost();
+
+  const handlePressOption = () => {
+    const options = ["삭제", "수정", "취소"];
+    const destructiveButtonIndex = 0;
+    const cancelButtonIndex = 2;
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+        destructiveButtonIndex,
+      },
+      (selectedIndex?: number) => {
+        switch (selectedIndex) {
+          case destructiveButtonIndex:
+            deletePost.mutate(post.id);
+            break;
+          case 1:
+            router.push(`/post/update/${post.id}`);
+            break;
+          default:
+            break;
+        }
+      },
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
@@ -25,6 +57,16 @@ function FeedItem({ post }: FeedItemProps) {
           nickname={post.author.nickname}
           createdAt={post.createdAt}
           onPress={() => {}}
+          option={
+            auth.id === post.author.id && (
+              <Ionicons
+                name="ellipsis-vertical"
+                size={24}
+                color={colors.BLACK}
+                onPress={handlePressOption}
+              />
+            )
+          }
         />
         <Text style={styles.title}>{post.title}</Text>
         <Text numberOfLines={3} style={styles.description}>
