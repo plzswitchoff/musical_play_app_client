@@ -6,9 +6,9 @@ import queryClient from "../../api/queryClient";
 function useDeletePost() {
   return useMutation({
     mutationFn: deletePost,
-    onSuccess: () => {
+    onSuccess: (id) => {
       queryClient.invalidateQueries({
-        queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
+        queryKey: [queryKeys.POST, queryKeys.GET_POSTS, id],
       });
     },
   });
