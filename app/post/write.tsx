@@ -3,17 +3,23 @@ import TitleInput from "@/components/TitleInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { ImageUri } from "@/types";
+import { ImageUri, VoteOption } from "@/types";
 import { useEffect } from "react";
 import { useNavigation } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import useCreatePost from "@/hooks/queries/useCreatePost";
 import PostWriteFooter from "@/components/PostWriteFooter";
+import ImagePreviewList from "@/components/ImagePreviewList";
+import VoteModal from "@/components/VoteModal";
+import VoteAttached from "@/components/voteAttached";
 
 type FormValues = {
   title: string;
   description: string;
   imageUris: ImageUri[];
+  isVoteOpen: boolean;
+  isVoteAttached: boolean;
+  voteOptions: VoteOption[];
 };
 
 export default function PostWriteScreen() {
@@ -24,6 +30,9 @@ export default function PostWriteScreen() {
       title: "",
       description: "",
       imageUris: [],
+      isVoteOpen: false,
+      isVoteAttached: false,
+      voteOptions: [{ displayPriority: 0, content: "" }],
     },
   });
 
@@ -52,8 +61,11 @@ export default function PostWriteScreen() {
       <KeyboardAwareScrollView contentContainerStyle={styles.container}>
         <TitleInput />
         <DescriptionInput />
+        <VoteAttached />
+        <ImagePreviewList imageUris={postForm.watch().imageUris} />
       </KeyboardAwareScrollView>
       <PostWriteFooter />
+      <VoteModal />
     </FormProvider>
   );
 }

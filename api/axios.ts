@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Platform } from "react-native";
 
-const baseUrls = {
+export const baseUrls = {
   ios: "http://localhost:3030/",
   android: "http://10.0.2.2:3030/",
 };

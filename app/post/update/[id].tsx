@@ -7,9 +7,9 @@ import { ImageUri } from "@/types";
 import { useEffect } from "react";
 import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import CustomButton from "@/components/CustomButton";
-import useCreatePost from "@/hooks/queries/useCreatePost";
 import { useGetPost } from "@/hooks/queries/useGetPost";
 import useUpdatePost from "@/hooks/queries/useUpdatePost";
+import VoteAttached from "@/components/voteAttached";
 
 type FormValues = {
   title: string;
@@ -62,6 +62,7 @@ export default function PostUpdateScreen() {
       <KeyboardAwareScrollView contentContainerStyle={styles.container}>
         <TitleInput />
         <DescriptionInput />
+        <VoteAttached />
       </KeyboardAwareScrollView>
     </FormProvider>
   );

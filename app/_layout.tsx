@@ -7,7 +7,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import queryClient from "@/api/queryClient";
 import Toast from "react-native-toast-message";
 import useAuth from "@/hooks/queries/useAuth";
-import {ActionSheetProvider} from "@expo/react-native-action-sheet";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -51,6 +51,7 @@ function RootNavigator() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="auth" options={{ headerShown: false }} />
       <Stack.Screen name="post" options={{ headerShown: false }} />
+      <Stack.Screen name="image" options={{ headerShown: false }} />
       <Stack.Screen name="+not-found" />
     </Stack>
   );
