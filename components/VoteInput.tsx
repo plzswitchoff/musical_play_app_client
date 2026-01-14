@@ -1,6 +1,6 @@
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { Pressable, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 import InputField from "./InputField";
 import { Ionicons } from "@expo/vector-icons";
 import { colors } from "@/constants";

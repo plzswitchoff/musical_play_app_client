@@ -8,7 +8,6 @@ import {
   Pressable,
   ScrollView,
   StyleSheet,
-  View,
 } from "react-native";
 
 interface ImagePreviewListProps {

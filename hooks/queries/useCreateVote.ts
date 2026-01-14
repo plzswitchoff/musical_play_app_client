@@ -10,6 +10,10 @@ function useCreateVote() {
       queryClient.invalidateQueries({
         queryKey: [queryKeys.POST, queryKeys.GET_POST, data.postId],
       });
+
+      queryClient.invalidateQueries({
+        queryKey: [queryKeys.POST, queryKeys.GET_POSTS],
+      });
     },
   });
 }

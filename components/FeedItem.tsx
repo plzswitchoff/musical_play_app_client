@@ -10,6 +10,7 @@ import { router } from "expo-router";
 import useDeletePost from "@/hooks/queries/useDeletePost";
 import ImagePreviewList from "@/components/ImagePreviewList";
 import Vote from "@/components/Vote";
+import useLikePost from "@/hooks/queries/useLikePost";
 
 interface FeedItemProps {
   post: Post;
@@ -18,13 +19,14 @@ interface FeedItemProps {
 
 function FeedItem({ post, isDetail = false }: FeedItemProps) {
   const { auth } = useAuth();
-
+  // console.log(post.likes);
   const likeUsers = post.likes?.map((like) => Number(like.userId));
 
   const isLiked = likeUsers?.includes(Number(auth.id));
 
   const { showActionSheetWithOptions } = useActionSheet();
   const deletePost = useDeletePost();
+  const likePost = useLikePost();
 
   const handlePressOption = () => {
     const options = ["삭제", "수정", "취소"];
@@ -56,6 +58,10 @@ function FeedItem({ post, isDetail = false }: FeedItemProps) {
     if (!isDetail) {
       router.push(`/post/${post.id}`);
     }
+  };
+
+  const handlePressLike = () => {
+    likePost.mutate(post.id);
   };
 
   const ContainerComponent = isDetail ? View : Pressable;
@@ -108,7 +114,7 @@ function FeedItem({ post, isDetail = false }: FeedItemProps) {
         )}
       </View>
       <View style={styles.menuContainer}>
-        <Pressable style={styles.menu}>
+        <Pressable style={styles.menu} onPress={handlePressLike}>
           <Octicons
             name={isLiked ? "heart-fill" : "heart"}
             size={16}

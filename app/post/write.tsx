@@ -11,7 +11,7 @@ import useCreatePost from "@/hooks/queries/useCreatePost";
 import PostWriteFooter from "@/components/PostWriteFooter";
 import ImagePreviewList from "@/components/ImagePreviewList";
 import VoteModal from "@/components/VoteModal";
-import VoteAttached from "@/components/voteAttached";
+import VoteAttached from "@/components/VoteAttached";
 
 type FormValues = {
   title: string;

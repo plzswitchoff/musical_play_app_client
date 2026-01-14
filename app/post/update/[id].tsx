@@ -9,7 +9,7 @@ import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import { useGetPost } from "@/hooks/queries/useGetPost";
 import useUpdatePost from "@/hooks/queries/useUpdatePost";
-import VoteAttached from "@/components/voteAttached";
+import VoteAttached from "@/components/VoteAttached";
 
 type FormValues = {
   title: string;

@@ -23,6 +23,8 @@ function Vote({ postId, postVotes, voteCount }: VoteProps) {
     createVote.mutate({ postId: postId, voteOptionId: Number(selectedId) });
   };
 
+  // console.log(postVotes[0].options);
+
   return (
     <View style={styles.container}>
       <View style={styles.label}>

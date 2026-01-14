@@ -9,7 +9,7 @@ import {
 import { removeHeader, setHeader } from "@/utils/header";
 import { useEffect } from "react";
 import queryClient from "@/api/queryClient";
-import {queryKeys} from "@/constants";
+import { queryKeys } from "@/constants";
 
 function useGetMe() {
   const { data, isSuccess, isError } = useQuery({
@@ -69,6 +69,8 @@ function useAuth() {
     auth: {
       id: data?.id || "",
       nickname: data?.nickname || "",
+      imageUri: data?.imageUri || "",
+      introduce: data?.introduce || "",
     },
     signupMutation,
     loginMutation,
