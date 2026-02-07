@@ -1,3 +1,8 @@
+interface Category {
+  id: number;
+  name: string;
+}
+
 interface User {
   id: number;
   nickname: string;
@@ -82,6 +87,7 @@ interface Post {
 }
 
 export type {
+  Category,
   Profile,
   PostVote,
   PostVoteOption,

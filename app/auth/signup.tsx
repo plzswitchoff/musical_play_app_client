@@ -5,9 +5,13 @@ import PasswordInput from "@/components/PasswordInput";
 import PasswordConfirmInput from "@/components/PasswordConfirmInput";
 import { FormProvider, useForm } from "react-hook-form";
 import useAuth from "@/hooks/queries/useAuth";
+import NicknameInput from "@/components/NicknameInput";
+import PhoneInput from "@/components/PhoneInput";
 
 type FormValues = {
   email: string;
+  nickname: string;
+  phone: string;
   password: string;
   passwordConfirm: string;
 };
@@ -17,6 +21,8 @@ export default function SignupScreen() {
   const signupForm = useForm({
     defaultValues: {
       email: "",
+      nickname: "",
+      phone: "",
       password: "",
       passwordConfirm: "",
     },
@@ -33,6 +39,8 @@ export default function SignupScreen() {
     <FormProvider {...signupForm}>
       <View style={styles.container}>
         <EmailInput />
+        <NicknameInput />
+        <PhoneInput />
         <PasswordInput submitBehavior="submit" returnKeyType={"next"} />
         <PasswordConfirmInput />
       </View>

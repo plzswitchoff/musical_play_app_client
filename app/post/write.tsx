@@ -1,3 +1,4 @@
+import CategorySelect from "@/components/CategorySelect";
 import DescriptionInput from "@/components/DescriptionInput";
 import TitleInput from "@/components/TitleInput";
 import { FormProvider, useForm } from "react-hook-form";
@@ -14,6 +15,7 @@ import VoteModal from "@/components/VoteModal";
 import VoteAttached from "@/components/VoteAttached";
 
 type FormValues = {
+  categoryId: number | null;
   title: string;
   description: string;
   imageUris: ImageUri[];
@@ -27,6 +29,7 @@ export default function PostWriteScreen() {
   const navigation = useNavigation();
   const postForm = useForm({
     defaultValues: {
+      categoryId: null,
       title: "",
       description: "",
       imageUris: [],
@@ -38,9 +41,7 @@ export default function PostWriteScreen() {
 
   const onSubmit = (formValues: FormValues) => {
     console.log(formValues);
-    postMutation.mutate({
-      ...formValues,
-    });
+    postMutation.mutate({ ...formValues });
   };
 
   useEffect(() => {
@@ -59,6 +60,7 @@ export default function PostWriteScreen() {
   return (
     <FormProvider {...postForm}>
       <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+        <CategorySelect />
         <TitleInput />
         <DescriptionInput />
         <VoteAttached />

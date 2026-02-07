@@ -43,7 +43,7 @@ function RootNavigator() {
     auth.id &&
       Toast.show({
         type: "success",
-        text1: `{auth.nickname ?? "회원"} 님, 환영합니다!`,
+        text1: `${auth.nickname ?? "회원"} 님, 환영합니다!`,
       });
   }, [auth.id]);
   return (
